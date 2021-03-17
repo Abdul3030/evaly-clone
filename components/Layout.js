@@ -18,11 +18,11 @@ const Layout = ({children}) => {
     return (
         <div className="w-full bg-gray-100">
             <SideDrawer clicked={drawerHandler} drawerOpen={open} />
-            <div className="sticky top-0">
+            <div className="sticky top-0 z-20">
                 <Header clicked={drawerHandler} />
                 <Nav clicked={drawerHandler} />
             </div>
-            <main className="w-full">
+            <main className="w-full mb-10">
                 {children}
             </main>
             <BottomNav />

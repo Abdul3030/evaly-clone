@@ -15,7 +15,7 @@ const Header = ({clicked}) => {
                     </button>
                     <img className="w-full hidden md:block h-full" src="https://evaly.com.bd/static/images/logo_b&w.svg" alt="Logo"/>
                 </div>
-                <div className="h-full px-5 flex-1 flex items-center">
+                <div className="h-full pl-5 md:px-5 flex-1 flex items-center">
                     <div className="w-full bg-red-500 border-2 border-red-500 rounded flex">
                         <input type="text" placeholder="Search for..." className="p-2 w-full focus:outline-none focus:bg-gray-50"/>
                         <div className="flex justify-center items-center px-6">
