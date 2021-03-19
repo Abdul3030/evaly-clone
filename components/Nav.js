@@ -9,19 +9,19 @@ const Nav = ({clicked}) => {
             <div className="container h-12 mx-auto px-2 hidden md:flex justify-between items-center">
                 <div className="min-h-full flex px-6 items-center cursor-pointer bg-red-600">
                     <button onClick={clicked} className="menu-icon focus:outline-none mr-6 text-xl text-white">
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
+                        <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
                     </button>
                     <div className="flex items-center text-white">
                         <span className="mr-8 text-xl font-bold">CATEGORIES</span>
                         <span className="text-xl">
-                            <svg className="text-xl" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            <svg className="text-xl" stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="6 9 12 15 18 9"></polyline></svg>
                         </span>
                     </div>
                 </div>
                 <div className="nav-items text-sm">
                     <ul className="flex justify-between items-center text-white font-bold">
                         <li className="p-2">
-                            <Link href="/allshops" >
+                            <Link href="/products" >
                                 All Shops
                             </Link>
                         </li>
@@ -49,7 +49,7 @@ const Nav = ({clicked}) => {
                 </div>
                 <div className="py-1 flex items-center text-sm font-light">
                     <div className="xl:hidden text-white cursor-pointer">
-                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                        <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
                     </div>
                     <ul className="hidden xl:flex text-white font-bold">
                         <li className="px-6 py-3">

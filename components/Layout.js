@@ -3,6 +3,7 @@ import BottomNav from "./BottomNav";
 import Footer from "./Footer";
 import Header from "./Header";
 import Nav from "./Nav";
+import Portal from './Portal';
 import SideDrawer from "./SideDrawer/SideDrawer";
 
 
@@ -17,7 +18,9 @@ const Layout = ({children}) => {
 
     return (
         <div className="w-full bg-gray-100">
-            <SideDrawer clicked={drawerHandler} drawerOpen={open} />
+            {
+                open && <SideDrawer clicked={drawerHandler} />
+            }
             <div className="sticky top-0 z-20">
                 <Header clicked={drawerHandler} />
                 <Nav clicked={drawerHandler} />

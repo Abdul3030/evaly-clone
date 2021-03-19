@@ -7,24 +7,24 @@ const cartSlice = createSlice({
     initialState: [{
             id: 150,
             title: 'Product Title',
-            price: 'Product Price',
+            price: 520,
+            quantity: 3,
     },
     {
             id: 110,
             title: 'Product Title',
-            price: 'Product Price',
+            price: 230,
             quantity: 1,
     }],
     reducers: {
         
         addToCart: (state, action) => {
-
             const item = action.payload;
-
             const itemIndex = state.findIndex(product => product.id === item.id);
 
             if(itemIndex < 0){
-                state.push({...action.payload, quantity: 1});
+                state.push(item);
+                state[state.length - 1].quantity = 1;
                 return
             }
 
