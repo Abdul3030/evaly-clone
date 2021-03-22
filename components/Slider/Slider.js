@@ -23,7 +23,7 @@ const Slider = () => {
                     <div className="w-full h-80 text-white flex justify-center items-center bg-gradient-to-r from-red-300 via-red-700 to-red-300">
                         <Link href={`${idx}`}>
                             <a >
-                                <img className='h-80 min-w-full' src={item.src} alt="Slide"/>
+                                <img className='h-80 w-full' src={item.src} alt="Slide"/>
                             </a>
                         </Link>
                     </div>

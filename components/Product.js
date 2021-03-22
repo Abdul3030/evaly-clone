@@ -18,7 +18,7 @@ const Product = ({item}) => {
                 </div>
                 <div className="description space-y-2 w-full">
                     <p className="title text-gray-500 text-xs md:text-base">
-                        Xiaomi Polyester Backpack - Magenta - (RTB-008) {title}
+                        {title}
                     </p>
                     <h3 className="price line-through text-gray-300 text-sm md:text-base">&#2547;{price}</h3>
                     <h3 className="discounted-price text-gray-500 text-sm md:text-base font-bold">&#2547;{Math.round(price - price * (discount / 100))}</h3>

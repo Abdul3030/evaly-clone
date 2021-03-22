@@ -26,7 +26,7 @@ const Header = ({clicked}) => {
         const rect  = inputRef.current.getBoundingClientRect();
         setCoords(rect);
     },[coords]);
-    console.log(coords);
+    
     return(
         <header  className="w-full z-10 bg-white">
             <div className="container mx-auto py-3 px-2 flex flex-row justify-between items-center relative" >

@@ -2,18 +2,19 @@ import Product from '../components/Product';
 import SectionHeader from '../components/ScectionHeader';
 import Slider from '../components/Slider/Slider';
 import Slider2 from '../components/Slider/Slider2';
+import {shop} from '../products';
 
 
-export default function Home({products}) {
+export default function Home() {
   
   return (
     <div className='w-full container px-2 mx-auto'>
       <div className="w-full flex">
-        <div className="w-1/5 shadow">
+        <div className="w-1/5 shadow bg-white">
           <ul>
             {
-              ['Desktop', 'Laptop', 'Mens watch', 'Microwave Oven', 'Motorbike', 'Refrigerator', 'Smartphone', 'Smart Tv & Android Tv', 'Speaker', 'Split Ac'].map( item => (
-                <li  className="p-3 text-sm text-gray-700 flex items-center cursor-pointer hover:bg-gray-300">
+              ['Desktop', 'Laptop', 'Mens watch', 'Microwave Oven', 'Motorbike', 'Refrigerator', 'Smartphone', 'Smart Tv & Android Tv', 'Speaker', 'Split Ac'].map( (item, idx) => (
+                <li key={idx}  className="p-3 text-sm text-gray-700 flex items-center cursor-pointer hover:bg-gray-100">
                   <span className="icon">
                       <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M14.5 3h-13a.5.5 0 00-.5.5v9a.5.5 0 00.5.5h13a.5.5 0 00.5-.5v-9a.5.5 0 00-.5-.5zm-13-1A1.5 1.5 0 000 3.5v9A1.5 1.5 0 001.5 14h13a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0014.5 2h-13z" clipRule="evenodd"></path><path fillRule="evenodd" d="M7 5.5a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5a.5.5 0 01-.5-.5zm-1.496-.854a.5.5 0 010 .708l-1.5 1.5a.5.5 0 01-.708 0l-.5-.5a.5.5 0 11.708-.708l.146.147 1.146-1.147a.5.5 0 01.708 0zM7 9.5a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5a.5.5 0 01-.5-.5zm-1.496-.854a.5.5 0 010 .708l-1.5 1.5a.5.5 0 01-.708 0l-.5-.5a.5.5 0 01.708-.708l.146.147 1.146-1.147a.5.5 0 01.708 0z" clipRule="evenodd"></path></svg>
                   </span>
@@ -34,7 +35,7 @@ export default function Home({products}) {
       <SectionHeader title="All Products">
         <div className="w-full grid grid-cols-2 py-5 pb-10 md:pb-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           {
-            products.map((item, idx) => <Product key={idx} item={item} />)
+            shop.products.map((item, idx) => <Product key={idx} item={item} />)
           }
         </div>
       </SectionHeader>
@@ -42,12 +43,12 @@ export default function Home({products}) {
   )
 };
 
-export async function getStaticProps () {
-  const res = await fetch('http://evaly-clone.vercel.app/api/products');
-  const data = await res.json();
-  return {
-    props: {
-      products: data
-    }
-  }
-};
+// export async function getStaticProps () {
+//   const res = await fetch('https://localhost:3000/api/products');
+//   const data = await res.json();
+//   return {
+//     props: {
+//       products: data
+//     }
+//   }
+// };

@@ -15,7 +15,7 @@ const images = [
 const Slider2 = () => {
 
     return (
-        <Swiper navigation loop autoplay={{delay: 3000}} slidesPerView={2} spaceBetween={10} >
+        <Swiper navigation loop autoplay={{delay: 5000}} slidesPerView={2} spaceBetween={10} >
 
             {
                 images.map((item, idx) => (
