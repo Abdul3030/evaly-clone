@@ -1,23 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Cart from './Cart/Cart';
 import Message from './Popover/Message';
 import Notification from './Popover/Notification';
 import PopLogin from './Popover/PopLogin';
+import TopSearch from './Popover/TopSearch';
 import Portal from './Portal';
 
 
 const Header = ({clicked}) => {
     const quantity = useSelector(state => state.carts.reduce((acc, item) => acc + item.quantity, 0));
-    
+    const [inputValue, setInputValue] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);
     const [messageOpen, setMessageOpen] = useState(false);
+    const [coords, setCoords] = useState(null);
+    const inputRef = useRef();
+
     const cartOpenHandler = () => {
         if(messageOpen){
             setMessageOpen(false);
         }
         setCartOpen(prev => !prev);
     };
+    useEffect(()=> {
+        const rect  = inputRef.current.getBoundingClientRect();
+        setCoords(rect);
+    },[coords]);
+    console.log(coords);
     return(
         <header  className="w-full z-10 bg-white">
             <div className="container mx-auto py-3 px-2 flex flex-row justify-between items-center relative" >
@@ -28,8 +37,11 @@ const Header = ({clicked}) => {
                     <img className="w-full hidden md:block h-full" src="https://evaly.com.bd/static/images/logo_b&w.svg" alt="Logo"/>
                 </div>
                 <div className="h-full pl-5 md:px-5 flex-1 flex items-center">
-                    <div className="w-full bg-red-500 border-2 border-red-500 rounded flex">
-                        <input type="text" placeholder="Search for..." className="p-2 w-full focus:outline-none focus:bg-gray-50"/>
+                    <div className="w-full bg-red-500 border-2 border-red-500 rounded flex relative">
+                        <input onBlur={() => setInputValue(false)} onKeyPress={() => setInputValue(true)} ref={inputRef} type="text" placeholder="Search for..." className="p-2 w-full focus:outline-none focus:bg-gray-50"/>
+                        {
+                            inputValue && <Portal selector="#modal"><TopSearch coords={coords} /></Portal>
+                        }
                         <div className="flex justify-center items-center px-6">
                             <svg className="text-2xl text-gray-200"  stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
                         </div>

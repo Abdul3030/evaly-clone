@@ -1,7 +1,10 @@
 import Layout from '../components/Layout'
 import { Provider } from 'react-redux';
 import store from '../store/store';
-import '../styles/globals.css'
+
+import '../styles/globals.css';
+import 'swiper/swiper-bundle.min.css';
+import '../styles/customSwiper.css';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -13,4 +16,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default MyApp;
