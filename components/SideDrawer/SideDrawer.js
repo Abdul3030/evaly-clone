@@ -21,7 +21,7 @@ const SideDrawer = ({drawerOpen, clicked}) => {
                     <div className="w-full h-full">
                         <ul className="py-2">
                             {
-                                ['Desktop', 'Laptop', 'Mens watch', 'Microwave Oven', 'Motorbike', 'Refrigerator', 'Smartphone', 'Smart Tv & Android Tv', 'Speaker', 'Split Ac'].map((i,idx) => <DrawerItem key={idx} />)
+                                ['Desktop', 'Laptop', 'Mens watch', 'Microwave Oven', 'Motorbike', 'Refrigerator', 'Smartphone', 'Smart Tv & Android Tv', 'Speaker', 'Split Ac'].map((item,idx) => <DrawerItem key={idx} title={item}  />)
                             }
                         </ul>
                     </div>

@@ -2,7 +2,7 @@
 
 
 const TopSearch = ({coords}) => {
-    console.log('Triggered TopSearch')
+    
     return (
         <div className="wrapper bg-white shadow-md rounded-md mt-5">
             <div className="w-full p-2">

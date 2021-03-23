@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import CartItem from "./CartItem"
 
@@ -7,6 +8,11 @@ const Cart = ({ clicked, cartOpen }) => {
     const cart = useSelector(state => state.carts);
     const subTotal = useSelector(state => state.carts.reduce((acc, item) => acc + (item.price * item.quantity), 0));
     const total = subTotal + 50;
+
+    useEffect(()=> {
+        localStorage.setItem('evalyCart', JSON.stringify(cart)); 
+    });
+    console.log(cart);
     return (
         <div className={`w-2/6 min-h-screen flex flex-col justify-between absolute bg-white top-0 right-0 rounded-l-md overflow-hidden shadow transition-all duration-500 ease-in-out transform ${cartOpen ? 'translate-x-0' : 'translate-x-full'}`}>
             <div className="header w-full flex justify-between px-3 py-2 bg-gray-200">

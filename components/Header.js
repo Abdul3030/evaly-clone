@@ -25,7 +25,7 @@ const Header = ({clicked}) => {
     useEffect(()=> {
         const rect  = inputRef.current.getBoundingClientRect();
         setCoords(rect);
-    },[coords]);
+    },[]);
     
     return(
         <header  className="w-full z-10 bg-white">

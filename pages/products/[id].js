@@ -2,23 +2,35 @@ import { useRouter } from 'next/router';
 import { shop } from '../../products';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
+import useSWR from 'swr';
 
-const Product = () => {
+
+
+const fetcher = (...args) => fetch(...args).then(res => res.json());
+
+const ProductDetails = () => {
 
     const dispatch = useDispatch();
     const router = useRouter();
-    const productId = router.query.id;
-    const product = shop.products.filter(item => item.id == productId);
+    const {id} = router.query;
+    const {data, error} = useSWR(`/api/products/${id}`, fetcher);
+    console.log(data);
+    if(!data){
+        return <div className="w-full h-full bg-red-300">The product is loading...</div>
+    }
+    if(error){
+        return <div className="w-full h-full">An error occured {error.message}</div>
+    }
     return (
         <div className="container mx-auto px-2 my-4">
             <div className="shadow-lg rounded-lg">
                 <div className="bg-white text-gray-700 lg:flex flex-row">
                     <div className="w-full image-wrapper p-4 lg:w-2/5">
-                        <img src="https://s3-ap-southeast-1.amazonaws.com/media.evaly.com.bd/media/images/79c002810213-rtb-008.png" alt="Product"/>
+                        <img src={data.image} alt="Product"/>
                     </div>
                     <div className="w-full p-4 description lg:w-2/5">
                         <div className="title">
-                            <h1>Xiaomi Polyester Backpack - Magenta - (RTB-008)</h1>
+                            <h1>{data.title}</h1>
                         </div>
                         <div className="mb-2">
                             <h4 className="text-gray-500">SKU: 0X73C0F</h4>
@@ -48,7 +60,7 @@ const Product = () => {
                                 </div>
                             </div>
                         </div>
-                        <div onClick={() => dispatch(addToCart(...product))} className="mt-6 mb-2">
+                        <div onClick={() => dispatch(addToCart(data))} className="mt-6 mb-2">
                             <button className="bg-red-600 py-2 w-full font-bold flex items-center justify-center rounded overflow-hidden whitespace-no-wrap">
                                 <span className="mr-3">
                                     <svg width="22" height="19" viewBox="0 0 22 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.63 13.45H6.675l.7-1.427 11.644-.02a.814.814 0 00.802-.671l1.612-9.026a.814.814 0 00-.799-.958l-14.812-.05-.127-.595a.832.832 0 00-.811-.656H1.262a.827.827 0 000 1.655h2.95l.554 2.63 1.362 6.592-1.754 2.862a.82.82 0 00-.07.862c.14.28.424.455.738.455h1.472a2.407 2.407 0 001.922 3.85 2.407 2.407 0 001.922-3.85h3.776a2.407 2.407 0 001.922 3.85 2.407 2.407 0 001.921-3.85h2.656c.455 0 .827-.37.827-.827a.83.83 0 00-.83-.825zM6.166 2.93l13.495.044-1.322 7.402-10.6.019L6.165 2.93zm2.271 14.36a.742.742 0 01-.74-.74c0-.409.332-.741.74-.741a.742.742 0 01.524 1.264.74.74 0 01-.524.217zm7.62 0a.742.742 0 01-.741-.74c0-.409.333-.741.74-.741a.742.742 0 01.524 1.264.74.74 0 01-.523.217z" fill="#fff"></path></svg>
@@ -93,4 +105,5 @@ const Product = () => {
     )
 };
 
-export default Product;
+export default ProductDetails;
+

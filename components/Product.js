@@ -12,7 +12,7 @@ const Product = ({item}) => {
                 <div className="w-full overflow-hidden">
                     <img
                     className="w-full z-0 h-full transition-transform duration-500 transform group-hover:scale-110" 
-                    src={image} 
+                    src={image}
                     alt="Product Snapshot" 
                     />
                 </div>
