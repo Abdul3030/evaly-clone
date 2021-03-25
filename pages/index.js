@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className='w-full container px-2 mx-auto'>
       <div className="w-full flex">
-        <div className="w-1/5 shadow bg-white">
+        <div className="w-1/5 shadow bg-white hidden lg:block">
           <ul>
             {
               ['Desktop', 'Laptop', 'Mens watch', 'Microwave Oven', 'Motorbike', 'Refrigerator', 'Smartphone', 'Smart Tv & Android Tv', 'Speaker', 'Split Ac'].map( (item, idx) => (
@@ -27,9 +27,11 @@ export default function Home() {
             }
           </ul>
         </div>
-        <div className="w-4/5 p-3">
+        <div className="w-full lg:w-4/5 p-3">
           <Slider />
-          <Slider2 />
+          <div className="w-full hidden lg:block">
+            <Slider2 />
+          </div>
         </div>
       </div>
       <SectionHeader title="All Products">

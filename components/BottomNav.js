@@ -1,14 +1,19 @@
+import { useDispatch, useSelector } from 'react-redux';
 import Notification from './Popover/Notification';
+import { cartOpenHandler } from '../store/cartSlice';
 
 
 const BottomNav = () => {
-
+    const dispatch = useDispatch();
+    const cart = useSelector(state => state.carts);
+    const quantity = cart.reduce((acc, item) => acc + item.quantity, 0);
 
     return (
         <div className="w-full md:hidden">
             <div className="w-full text-sm shadow rounded-t-lg  fixed bottom-0 bg-white py-3 px-5 text-gray-700 flex justify-between items-center icons">
-                <div className="p-2 flex flex-col items-center cursor-pointer ">
-                    <div className="bg-gray-50 rounded-full p-2 border border-gray-100">
+                <div onClick={() => dispatch(cartOpenHandler())} className="p-2 flex flex-col items-center cursor-pointer ">
+                    <div className="bg-gray-50 rounded-full p-2 border border-gray-100 relative">
+                        <span className="w-5 h-5 bg-gradient-to-r p-1 from-red-500 to-red-900 text-white absolute -top-3 text-xs rounded-full flex justify-center items-center  right-0">{quantity}</span>
                         <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
                     </div>
                     <h4>Cart</h4>

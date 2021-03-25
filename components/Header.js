@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { cartOpenHandler } from '../store/cartSlice';
 import Cart from './Cart/Cart';
 import Message from './Popover/Message';
 import Notification from './Popover/Notification';
@@ -9,19 +10,15 @@ import Portal from './Portal';
 
 
 const Header = ({clicked}) => {
-    const quantity = useSelector(state => state.carts.reduce((acc, item) => acc + item.quantity, 0));
+    const dispatch = useDispatch();
+    const state = useSelector(state => state);
+    const quantity = state.carts.reduce((acc, item) => acc + item.quantity, 0);
+    const cartOpen = state.isOpen;
     const [inputValue, setInputValue] = useState(false);
-    const [cartOpen, setCartOpen] = useState(false);
     const [messageOpen, setMessageOpen] = useState(false);
     const [coords, setCoords] = useState(null);
     const inputRef = useRef();
 
-    const cartOpenHandler = () => {
-        if(messageOpen){
-            setMessageOpen(false);
-        }
-        setCartOpen(prev => !prev);
-    };
     useEffect(()=> {
         const rect  = inputRef.current.getBoundingClientRect();
         setCoords(rect);
@@ -50,7 +47,7 @@ const Header = ({clicked}) => {
                 <div className="w-3/12 h-full hidden md:flex justify-between items-center icons">
                     <div className="p-2 relative rounded-full bg-gray-50 border border-gray-100 cursor-pointer ">
                         {
-                            cartOpen && 
+                            cartOpen &&
                             <Portal selector="#modal">
                                 <div className="w-full min-h-screen z-40 fixed top-0 right-0 bg-gray-800 bg-opacity-70">
                                     <Cart clicked={cartOpenHandler} cartOpen={cartOpen} />
@@ -58,7 +55,7 @@ const Header = ({clicked}) => {
                             </Portal>
                         }
                         <span className="w-5 h-5 bg-gradient-to-r p-1 from-red-500 to-red-900 text-white absolute -top-3 text-xs rounded-full flex justify-center items-center  right-0">{quantity}</span>
-                        <svg onClick={cartOpenHandler} stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                        <svg onClick={() => dispatch(cartOpenHandler())} stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
                     </div>
                     <div  className="p-2 rounded-full bg-gray-50 border border-gray-100 cursor-pointer">
                         <Message open={messageOpen} />

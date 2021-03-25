@@ -47,7 +47,7 @@ const ProductDetails = () => {
                             Starting price
                             </span>
                         </div>
-                        <div className="mt-6">
+                        {/* <div className="mt-6">
                             <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
                                 <div className="flex flex-col">
                                     <label className="text-sm font-semibold text-gray-700 whitespace-no-wrap">
@@ -59,13 +59,13 @@ const ProductDetails = () => {
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div onClick={() => dispatch(addToCart(data))} className="mt-6 mb-2">
                             <button className="bg-red-600 py-2 w-full font-bold flex items-center justify-center rounded overflow-hidden whitespace-no-wrap">
                                 <span className="mr-3">
                                     <svg width="22" height="19" viewBox="0 0 22 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.63 13.45H6.675l.7-1.427 11.644-.02a.814.814 0 00.802-.671l1.612-9.026a.814.814 0 00-.799-.958l-14.812-.05-.127-.595a.832.832 0 00-.811-.656H1.262a.827.827 0 000 1.655h2.95l.554 2.63 1.362 6.592-1.754 2.862a.82.82 0 00-.07.862c.14.28.424.455.738.455h1.472a2.407 2.407 0 001.922 3.85 2.407 2.407 0 001.922-3.85h3.776a2.407 2.407 0 001.922 3.85 2.407 2.407 0 001.921-3.85h2.656c.455 0 .827-.37.827-.827a.83.83 0 00-.83-.825zM6.166 2.93l13.495.044-1.322 7.402-10.6.019L6.165 2.93zm2.271 14.36a.742.742 0 01-.74-.74c0-.409.332-.741.74-.741a.742.742 0 01.524 1.264.74.74 0 01-.524.217zm7.62 0a.742.742 0 01-.741-.74c0-.409.333-.741.74-.741a.742.742 0 01.524 1.264.74.74 0 01-.523.217z" fill="#fff"></path></svg>
                                 </span>
-                                Buy the product
+                                Add to cart the product
                             </button>
                         </div>
                         <div className="mt-4">

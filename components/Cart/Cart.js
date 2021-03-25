@@ -1,22 +1,22 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import CartItem from "./CartItem"
+import { useSelector, useDispatch } from 'react-redux';
+import { cartOpenHandler } from '../../store/cartSlice';
+import CartItem from "./CartItem";
 
 
 
-const Cart = ({ clicked, cartOpen }) => {
+const Cart = () => {
+    const dispatch = useDispatch();
     const cart = useSelector(state => state.carts);
-    const subTotal = useSelector(state => state.carts.reduce((acc, item) => acc + (item.price * item.quantity), 0));
+    const cartOpen = useSelector(state => state.isOpen);
+    const subTotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
     const total = subTotal + 50;
 
-    useEffect(()=> {
-        localStorage.setItem('evalyCart', JSON.stringify(cart)); 
-    });
-    console.log(cart);
+
     return (
-        <div className={`w-2/6 min-h-screen flex flex-col justify-between absolute bg-white top-0 right-0 rounded-l-md overflow-hidden shadow transition-all duration-500 ease-in-out transform ${cartOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className={`w-full md:w-2/6 min-h-screen flex flex-col justify-between absolute bg-white top-0 right-0 rounded-l-md overflow-hidden shadow transition-all duration-500 ease-in-out transform ${cartOpen ? 'translate-x-0' : 'translate-x-full'}`}>
             <div className="header w-full flex justify-between px-3 py-2 bg-gray-200">
-                <div onClick={clicked} className="cursor-pointer">
+                <div onClick={() => dispatch(cartOpenHandler())} className="cursor-pointer">
                     <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" size="25" height="25" width="25" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
                 </div>
                 <h2>My Cart</h2>

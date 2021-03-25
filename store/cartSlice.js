@@ -16,8 +16,10 @@ const cartSlice = createSlice({
             title: 'Product Title',
             price: 230,
             quantity: 1,
-    }]
+    }],
+    isOpen: true,
     },
+
     reducers: {
         
         addToCart: (state, action) => {
@@ -47,11 +49,17 @@ const cartSlice = createSlice({
             state.carts.splice(itemIndex, 1);
             
         },
-        customQuantity: {}
+        cartOpenHandler: state => {
+            if(state.isOpen === true){
+                state.isOpen = false;
+                return
+            } 
+            state.isOpen = true;
+        },
     }
 });
 
 
-export const  { addToCart, removeFromCart, deleteFromCart, customQuantity } = cartSlice.actions;
+export const  { addToCart, removeFromCart, deleteFromCart, cartOpenHandler } = cartSlice.actions;
 
 export default cartSlice.reducer;
