@@ -17,7 +17,7 @@ const cartSlice = createSlice({
             price: 230,
             quantity: 1,
     }],
-    isOpen: true,
+    isOpen: false,
     },
 
     reducers: {

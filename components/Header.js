@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartOpenHandler } from '../store/cartSlice';
+import { signIn, signOut, useSession } from 'next-auth/client';
 import Cart from './Cart/Cart';
 import Message from './Popover/Message';
 import Notification from './Popover/Notification';
@@ -16,14 +17,18 @@ const Header = ({clicked}) => {
     const cartOpen = state.isOpen;
     const [inputValue, setInputValue] = useState(false);
     const [messageOpen, setMessageOpen] = useState(false);
+    const [loginOpen, setLoginOpen] = useState(false);
     const [coords, setCoords] = useState(null);
     const inputRef = useRef();
 
-    useEffect(()=> {
-        const rect  = inputRef.current.getBoundingClientRect();
+    const [session, loading] = useSession();
+
+    const topSearchHandler = (e) => {
+        const rect  = e.target.getBoundingClientRect();
         setCoords(rect);
-    },[]);
-    
+        setInputValue(true);
+    };
+
     return(
         <header  className="w-full z-10 bg-white">
             <div className="container mx-auto py-3 px-2 flex flex-row justify-between items-center relative" >
@@ -35,7 +40,7 @@ const Header = ({clicked}) => {
                 </div>
                 <div className="h-full pl-5 md:px-5 flex-1 flex items-center">
                     <div className="w-full bg-red-500 border-2 border-red-500 rounded flex relative">
-                        <input onBlur={() => setInputValue(false)} onKeyPress={() => setInputValue(true)} ref={inputRef} type="text" placeholder="Search for..." className="p-2 w-full focus:outline-none focus:bg-gray-50"/>
+                        <input onBlur={() => setInputValue(false)} onKeyPress={topSearchHandler} ref={inputRef} type="text" placeholder="Search for..." className="p-2 w-full focus:outline-none focus:bg-gray-50"/>
                         {
                             inputValue && <Portal selector="#modal"><TopSearch coords={coords} /></Portal>
                         }
@@ -66,8 +71,13 @@ const Header = ({clicked}) => {
                         <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
                     </div>
                     <div className="p-2 rounded-full bg-gray-50 border border-gray-100 cursor-pointer">
-                        <PopLogin open={false} />
-                        <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        {
+                            session ? 
+                                <img onClick={() => setLoginOpen(prev => !prev)} src={session.user.image} className="w-4 h-4 rounded-full" alt="User"/>
+                               :<svg onClick={() => setLoginOpen(prev => !prev)} stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                
+                        }
+                        <PopLogin open={loginOpen} />
                     </div>
                 </div>
             </div>
