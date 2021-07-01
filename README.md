@@ -1,7 +1,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Evaly Clone
+![image](https://user-images.githubusercontent.com/86480763/124058947-22bb4500-da4c-11eb-9def-3adc05cdc29f.png)
+![image](https://user-images.githubusercontent.com/86480763/124059027-3e265000-da4c-11eb-9ed4-321fb6371921.png)
 
+## Project demo [view](https://evaly-clone.vercel.app/)
 First, run the development server:
 
 ```bash
